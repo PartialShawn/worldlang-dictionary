@@ -9,6 +9,9 @@ use function WorldlangDict\array_first;
 
 function display_example(array $example, string $lang) {
     
+    if (empty($example) || empty($example['translations']))
+        return;
+
     if (empty($example['cite']['text'])) {
         $citation = null;
     } elseif (isset($example['cite']['text'][$lang])) {
