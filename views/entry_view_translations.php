@@ -197,11 +197,6 @@ if (isset($entry['entry notes'])) :
                 break;
         endswitch;
     endforeach;
-
-
-elseif (isset($entry['entry note beta'])) : ?>
-    <p><?= $entry['entry note beta']; ?></p>
-<?
 endif;
 ?>
 
