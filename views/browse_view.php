@@ -80,6 +80,8 @@
             <label for="cat-affix" class=""><?= $config->getTrans('affix') ?></label>
             <input id="cat-root" type="radio" name="category" value="root">
             <label for="cat-root" class=""><?= $config->getTrans('root') ?></label>
+            <input id="cat-bound-root" type="radio" name="category" value="bound root">
+            <label for="cat-bound-root" class=""><?= $config->getTrans('bound root') ?></label>
             <input id="cat-proper-noun" type="radio" name="category" value="proper word">
             <label for="cat-proper-noun" class=""><?= $config->getTrans('proper noun') ?></label>
             <input id="cat-derived" type="radio" name="category" value="derived">
