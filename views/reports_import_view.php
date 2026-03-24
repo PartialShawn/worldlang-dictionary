@@ -1,8 +1,8 @@
 <?php
 
-namespace WorldlangDict;
+declare(strict_types=1);
 
-// TODO: i18n
+namespace WorldlangDict;
 
 ?>
 <!doctype html>
@@ -15,8 +15,8 @@ namespace WorldlangDict;
 
 <main id="parse_report">
 
-<h1>Parse report</h1>
-<p>These are the notices generated the last time the word list was processed.</p>
+<h1><?= $config->getTrans('report import title') ?></h1>
+<p><?= $config->getTrans('report import description') ?></p>
 
 <ol>
 <? foreach($data as $notice) { ?>

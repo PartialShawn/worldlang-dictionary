@@ -1,8 +1,8 @@
 <?php
 
-namespace WorldlangDict;
+declare(strict_types=1);
 
-// TODO: i18n
+namespace WorldlangDict;
 
 $cur_date = "";
 
@@ -18,9 +18,7 @@ $cur_date = "";
 <main id="changelog_report">
 
   <h1><?=$title?></h1>
-  <p><?=$headline?></p>
-
-  <hr/>
+  <p><?=$description?></p>
 
 <? if (!empty($data)): ?>
   <dl>
@@ -37,7 +35,7 @@ $cur_date = "";
 
       <div>
         <dt>
-        <? if (isset($defs)):
+        <? if (isset($defs[$datum['term']])):
             $def = $defs[$datum['term']];
             echo(WorldlangDictUtils::makeLink(
                 config:$config, request:$request,
@@ -45,16 +43,21 @@ $cur_date = "";
                 text:$defs[$datum['term']]['term'])
             );
           else:
-            echo("<strong>{$datum['term']}</strong>");
+            echo("<strong>{$datum['term']}</strong>:");
           endif;
           ?>
         </dt>
         <dd>
-        <? if (isset($datum['message'])) : echo $datum['message'];
-        else: ?>
+        <?php
+        if (isset($defs[$datum['term']])): ?>
         <em>(<a href="<?=$config->grammar_url;?>"><?=$defs[$datum['term']]['class'];?></a>)</em>&nbsp;
         <?=$defs[$datum['term']]['translation'];?>
-        <? endif; ?>
+        <?php else: ?>
+          [<?= $config->getTrans('report entry missing msg') ?>]
+        <? endif;
+        if (isset($datum['message'])) :
+          echo "<p>{$datum['message']}</p>"; 
+        endif;?>
         </dd>
       </div>
   <? endforeach; ?>
