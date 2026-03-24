@@ -871,10 +871,6 @@ textarea {
 
     main.entry {
         display: grid;
-        grid-template-areas: 
-        "header header header"
-        "col1 col2 col_debug"
-        "footer footer footer";
         margin-inline: 1em;
         width: auto;
     }
