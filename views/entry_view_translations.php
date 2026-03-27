@@ -177,14 +177,21 @@ if (isset($entry['entry notes'])) :
             case 'kompara':
                 ?>  <p><?= $config->getTrans('entry note '.$type); ?>: <?
                 $nfirst = true;
-                foreach ($entry['entry notes'][$type] as $slug) :
-                    $slug = mb_trim($slug, encoding:"UTF-8");
+                foreach ($entry['entry notes'][$type] as $note_slug => $note_term) :
+
+                    // old api2 uses slug=>null sometimes, sometimes gets terms, and is a bit of a mess.
+                    // unlcear if it always usews proper slugs, probably sometimes gets proper term?
+                    // TODO: remove 2 lines when using Entry class based API.
+                    if (is_int($note_slug)) $note_slug = $note_term;
+                    if (empty($note_term)) $note_term = $note_slug;
+
+                    $note_slug = mb_trim($slug, encoding:"UTF-8");
                     if (!$nfirst) {
                         echo(", ");
                     } else {
                         $nfirst = false;
                     }
-                    ?>  <a href="<?= WorldlangDictUtils::makeUri(config:$config, controller:'word', arg:$slug, request: $request); ?>" lang="<?= WL_CODE_FULL; ?>"><?= $slug; ?></a><?
+                    ?>  <a href="<?= WorldlangDictUtils::makeUri(config:$config, controller:'word', arg:$note_slug, request: $request); ?>" lang="<?= WL_CODE_FULL; ?>"><?= $note_term; ?></a><?
                 endforeach;
                 ?>.</p><?
                 break;
