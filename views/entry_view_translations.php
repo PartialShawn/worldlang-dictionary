@@ -170,7 +170,6 @@ foreach ($entry['trans html'] as $lang=>$data) {
 
 
 if (isset($entry['entry notes'])) :
-    var_dump($entry['entry notes']);
     foreach ($entry['entry notes'] as $type=>$data) :
         switch ($type) :
             case 'am oko':
