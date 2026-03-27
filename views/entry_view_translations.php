@@ -170,6 +170,7 @@ foreach ($entry['trans html'] as $lang=>$data) {
 
 
 if (isset($entry['entry notes'])) :
+    var_dump($entry['entry notes']);
     foreach ($entry['entry notes'] as $type=>$data) :
         switch ($type) :
             case 'am oko':
@@ -185,7 +186,7 @@ if (isset($entry['entry notes'])) :
                     if (is_int($note_slug)) $note_slug = $note_term;
                     if (empty($note_term)) $note_term = $note_slug;
 
-                    $note_slug = mb_trim($slug, encoding:"UTF-8");
+                    $note_slug = mb_trim($note_slug, encoding:"UTF-8");
                     if (!$nfirst) {
                         echo(", ");
                     } else {
