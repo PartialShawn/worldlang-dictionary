@@ -11,7 +11,14 @@ class Word_controller
         if (!isset($request->arguments[0])) self::randomWord($config, $request, $page);
         $slug = mb_strtolower($request->arguments[0], encoding:"UTF-8");
         $file = $config->api2Path.'terms/'.$slug.'.yaml';
-        if (!file_exists($file)) throw new Error_404_Exception("Entry Not Found");
+        // Check if file exists. If not, slugify spaces and brackets
+        if (!file_exists($file)) {
+            $file = str_replace(' ', '_', $file);
+
+            if (!file_exists($file))
+                throw new Error_404_Exception("Entry Not Found");
+
+        }
         $entry = yaml_parse_file($file);
 
         $page->setTitle(isset($entry['term_spec']) ? $entry['term_spec'] : $entry['term']);
